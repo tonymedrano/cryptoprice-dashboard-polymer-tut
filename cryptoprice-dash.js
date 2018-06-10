@@ -7,17 +7,25 @@ class CryptoPriceDash extends Polymer.Element {
           value: [
             {
               code: 'BTC',
-              name: 'Bitcoin'
+              name: 'Bitcoin',
+              price: 0
             },
             {
               code: 'ETH',
-              name: 'Ethereum'
+              name: 'Ethereum',
+              price: 0
             },
             {
               code: 'LTC',
-              name: 'Litecoin'
+              name: 'Litecoin',
+              price: 0
             }
           ]
+        },
+        loading:{
+          type: Boolean,
+          notify: true,
+          value: false
         }
       };
     }
@@ -36,7 +44,12 @@ class CryptoPriceDash extends Polymer.Element {
       });
     }
     _handleResponse(response){
-      console.log(response);
+      this._computeCurrencyPrice(response.detail);
+    }
+    _computeCurrencyPrice(source){
+      let code = source.url.substring(35,38);
+      let index = this.currencies.map(e => e.code).indexOf(code);
+      this.set(`currencies.${index}.price`, source.response.data.amount);
     }
   }
 

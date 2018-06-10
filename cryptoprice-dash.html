@@ -1,5 +1,6 @@
 <link rel="import" href="./bower_components/polymer/polymer-element.html">
 <link rel="import" href="./bower_components/iron-ajax/iron-ajax.html">
+<link rel="import" href="./bower_components/paper-spinner/paper-spinner-lite.html">
 
 <link rel="stylesheet" href="./cryptoprice-dash.css">
 
@@ -10,7 +11,13 @@
         display: block;
       }
     </style>
-    <iron-ajax id="coinbase" handle-as"json" on-response="_handleResponse"></iron-ajax>
+    <iron-ajax id="coinbase" handle-as"json" on-response="_handleResponse" loading="{{loading}}"></iron-ajax>
+    <paper-spinner-lite active="[[loading]]"></paper-spinner-lite>
+   <div hidden$="[[loading]]">
+    <template is="dom-repeat" items="[[currencies]]">
+      <p>[[item.code]] - [[item.name]] - $[[item.price]]</p>
+    </template>
+   </div>
   </template>
 
   <script src="./cryptoprice-dash.js"></script>
