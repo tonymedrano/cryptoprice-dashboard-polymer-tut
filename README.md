@@ -1,4 +1,4 @@
-# \<google-maps\>
+# \<cryptoprice-dash\>
 
 its learning tutorial, do not get too excited!
 
